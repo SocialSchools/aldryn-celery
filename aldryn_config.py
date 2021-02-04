@@ -11,8 +11,8 @@ class Form(forms.BaseForm):
         s = settings
         env = partial(djsenv, settings=settings)
 
-        s['CELERY_BROKER_URL'] = env('CELERY_BROKER_URL')
-        s['ENABLE_CELERY'] = env('ENABLE_CELERY', bool(s['CELERY_BROKER_URL']))
+        s['BROKER_URL'] = env('BROKER_URL')
+        s['ENABLE_CELERY'] = env('ENABLE_CELERY', bool(s['BROKER_URL']))
         if not s['ENABLE_CELERY']:
             return settings
         # aldryn_celery must be after djcelery so it can manipulate its admin
