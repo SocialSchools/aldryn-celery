@@ -17,8 +17,6 @@ class Form(forms.BaseForm):
             return settings
         # aldryn_celery must be after djcelery so it can manipulate its admin
         s['INSTALLED_APPS'].append('aldryn_celery')
-        s['CELERYBEAT_SCHEDULER'] = env('CELERYBEAT_SCHEDULER', 'djcelery.schedulers.DatabaseScheduler')
-        s['CELERY_RESULT_BACKEND'] = env('CELERY_RESULT_BACKEND', 'djcelery.backends.database:DatabaseBackend')
 
         s['CELERY_TASK_RESULT_EXPIRES'] = env('CELERY_TASK_RESULT_EXPIRES', 5 * 60 * 60)
         s['CELERY_ACCEPT_CONTENT'] = env('CELERY_ACCEPT_CONTENT', ['json'])
@@ -53,7 +51,6 @@ class Form(forms.BaseForm):
         s['CELERYD_CONCURRENCY'] = env('CELERYD_CONCURRENCY', '2')
         s['CELERY_SEND_EVENTS'] = env('CELERY_SEND_EVENTS', True)
 
-        s['CELERY_CAM_CLASS'] = env('CELERY_CAM_CLASS', 'djcelery.snapshot.Camera')
         s['CELERY_CAM_FREQUENCY'] = env('CELERY_CAM_FREQUENCY', 10)
 
         # celery uses CELERY_ENABLE_UTC=True as default and djcelery (and thus
