@@ -34,6 +34,7 @@ def get_version(relpath):
 
 REQUIREMENTS = [
     'aldryn-django',
+    'celery==4.4.7',
 ]
 
 
